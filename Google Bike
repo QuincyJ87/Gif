@@ -1,0 +1,505 @@
+
+
+import java.util.Scanner; 
+import java.io.*;
+
+
+public class Recursion
+{
+
+
+
+public static void main(String[] args) throws IOException 
+{
+
+final int ROW = 667;
+final int COL = 1000;
+File file = new File("AndroidBike1.ppm" );
+File file2 = new File("AndroidBike2.ppm");
+File file3 = new File("Mid.ppm");
+File file4 = new File("Front.ppm");
+File file5 = new File("Front1.ppm");
+File file6 = new File("Front2.ppm");
+File file7 = new File("Back.ppm");
+File file8 = new File("Back1.ppm");
+File file9 = new File("Back2.ppm");
+
+
+Scanner keyboard = new Scanner(file);
+Scanner keyboard2 = new Scanner(file);
+Scanner keyboard3 = new Scanner(file);
+Scanner keyboard4 = new Scanner(file);
+//Back-Half
+Scanner keyboard5 = new Scanner(file2);
+Scanner keyboard6 = new Scanner(file2);
+Scanner keyboard7 = new Scanner(file2);
+
+PrintWriter Mid = new PrintWriter("Mid.ppm");
+PrintWriter Front = new PrintWriter("Front.ppm");
+PrintWriter Front1 = new PrintWriter("Front1.ppm");
+PrintWriter Front2 = new PrintWriter("Front2.ppm");
+PrintWriter Back = new PrintWriter("Back.ppm");
+PrintWriter Back1 = new PrintWriter("Back1.ppm");
+PrintWriter Back2 = new PrintWriter("Back2.ppm");
+
+int [][][] StartImage = new int [ROW] [COL] [3];
+int [][][] EndImage = new int [ROW] [COL] [3];
+int [][][] MiddleImage = new int [ROW] [COL] [3];
+int [][][] newImage = new int [ROW] [COL] [3];
+int [][][] new2Image = new int [ROW] [COL] [3];
+int [][][] new3Image = new int [ROW] [COL] [3];
+int [][][] BackImage = new int [ROW] [COL] [3];
+int [][][] BackImage1 = new int [ROW] [COL] [3];
+int [][][] BackImage2 = new int [ROW] [COL] [3];
+
+
+int row = 0, col = 0;
+int line = 1;
+while(keyboard.hasNext())
+{
+if(line<=4)
+{
+Mid.println(keyboard.nextLine());
+line++;
+}
+else 
+{
+line+=3;
+if (col<COL)
+{
+StartImage[row][col][0] = keyboard.nextInt();
+StartImage[row][col][1] = keyboard.nextInt();
+StartImage[row][col][2] = keyboard.nextInt();
+col++;
+
+}
+else
+{
+row++;
+col = 0;
+StartImage[row][col][0] = keyboard.nextInt();
+StartImage[row][col][1] = keyboard.nextInt();
+StartImage[row][col][2] = keyboard.nextInt();
+col++;
+
+}
+}
+}
+keyboard.close();
+//**************************************************************************************************************************************************************************
+
+line=1;
+row=0;
+col=0;
+Scanner inputF = new Scanner(file2);
+while(inputF.hasNext())
+{
+if(line<=4)
+{
+inputF.nextLine();
+line++;
+}
+else 
+{
+line+=3;
+if (col<COL)
+{
+EndImage[row][col][0] = inputF.nextInt();
+EndImage[row][col][1] = inputF.nextInt();
+EndImage[row][col][2] = inputF.nextInt();
+col++;
+
+}
+else
+{
+row++;
+col = 0;
+EndImage[row][col][0] = inputF.nextInt();
+EndImage[row][col][1] = inputF.nextInt();
+EndImage[row][col][2] = inputF.nextInt();
+col++;
+}
+}
+}
+inputF.close();
+
+
+for(row = 0; row < ROW; row++)
+{
+for(col=0; col<COL;col++)
+{
+for(int color = 0; color<3; color++)
+{
+MiddleImage[row][col][color] = (StartImage[row][col][color] + EndImage[row][col][color])/2;
+Mid.println(MiddleImage[row][col][color]);
+System.out.println(MiddleImage[row][col][color]);
+}
+}
+}
+Mid.close();
+
+//*****************************************************************************************************************************************************************
+line=1;
+row=0;
+col=0;
+
+while(keyboard2.hasNext())
+{
+if(line<=4)
+{
+Front.println(keyboard2.nextLine());
+line++;
+}
+else 
+{
+line+=3;
+if (col<COL)
+{
+StartImage[row][col][0] = keyboard2.nextInt();
+StartImage[row][col][1] = keyboard2.nextInt();
+StartImage[row][col][2] = keyboard2.nextInt();
+col++;
+
+}
+else
+{
+row++;
+col = 0;
+StartImage[row][col][0] = keyboard2.nextInt();
+StartImage[row][col][1] = keyboard2.nextInt();
+StartImage[row][col][2] = keyboard2.nextInt();
+col++;
+
+}
+}
+}
+keyboard2.close();
+
+
+for(row = 0; row < ROW; row++)
+{
+for(col=0; col<COL;col++)
+{
+for(int color = 0; color<3; color++)
+{
+newImage[row][col][color] = (StartImage[row][col][color] + MiddleImage[row][col][color])/2;
+Front.println(newImage[row][col][color]);
+System.out.println(newImage[row][col][color]);
+}
+}
+}
+Front.close();
+
+//***************************************************************************************************************************************************
+line=1;
+row=0;
+col=0;
+
+while(keyboard3.hasNext())
+{
+if(line<=4)
+{
+Front1.println(keyboard3.nextLine());
+line++;
+}
+else 
+{
+line+=3;
+if (col<COL)
+{
+StartImage[row][col][0] = keyboard3.nextInt();
+StartImage[row][col][1] = keyboard3.nextInt();
+StartImage[row][col][2] = keyboard3.nextInt();
+col++;
+
+}
+else
+{
+row++;
+col = 0;
+StartImage[row][col][0] = keyboard3.nextInt();
+StartImage[row][col][1] = keyboard3.nextInt();
+StartImage[row][col][2] = keyboard3.nextInt();
+col++;
+
+}
+}
+}
+keyboard3.close();
+
+
+for(row = 0; row < ROW; row++)
+{
+for(col=0; col<COL;col++)
+{
+for(int color = 0; color<3; color++)
+{
+new2Image[row][col][color] = (StartImage[row][col][color] + newImage[row][col][color])/2;
+Front1.println(new2Image[row][col][color]);
+System.out.println(new2Image[row][col][color]);
+}
+}
+}
+Front1.close();
+//**************************************************************************************************************************************************************
+line=1;
+row=0;
+col=0;
+
+while(keyboard4.hasNext())
+{
+if(line<=4)
+{
+Front2.println(keyboard4.nextLine());
+line++;
+}
+else 
+{
+line+=3;
+if (col<COL)
+{
+StartImage[row][col][0] = keyboard4.nextInt();
+StartImage[row][col][1] = keyboard4.nextInt();
+StartImage[row][col][2] = keyboard4.nextInt();
+col++;
+
+}
+else
+{
+row++;
+col = 0;
+StartImage[row][col][0] = keyboard4.nextInt();
+StartImage[row][col][1] = keyboard4.nextInt();
+StartImage[row][col][2] = keyboard4.nextInt();
+col++;
+
+}
+}
+}
+keyboard4.close();
+
+
+for(row = 0; row < ROW; row++)
+{
+for(col=0; col<COL;col++)
+{
+for(int color = 0; color<3; color++)
+{
+new3Image[row][col][color] = (StartImage[row][col][color] + new2Image[row][col][color])/2;
+Front2.println(new3Image[row][col][color]);
+System.out.println(new3Image[row][col][color]);
+}
+}
+}
+Front2.close();  
+
+//********************************************************************************************************************************************************************
+
+line=1;
+row=0;
+col=0;
+
+while(keyboard5.hasNext())
+{
+if(line<=4)
+{
+Back.println(keyboard5.nextLine());
+line++;
+}
+else 
+{
+line+=3;
+if (col<COL)
+{
+EndImage[row][col][0] = keyboard5.nextInt();
+EndImage[row][col][1] = keyboard5.nextInt();
+EndImage[row][col][2] = keyboard5.nextInt();
+col++;
+
+}
+else
+{
+row++;
+col = 0;
+EndImage[row][col][0] = keyboard5.nextInt();
+EndImage[row][col][1] = keyboard5.nextInt();
+EndImage[row][col][2] = keyboard5.nextInt();
+col++;
+
+}
+}
+}
+keyboard5.close();
+
+
+for(row = 0; row < ROW; row++)
+{
+for(col=0; col<COL;col++)
+{
+for(int color = 0; color<3; color++)
+{
+BackImage[row][col][color] = (MiddleImage[row][col][color] + EndImage[row][col][color])/2;
+Back.println(BackImage[row][col][color]);
+System.out.println(BackImage[row][col][color]);
+}
+}
+}
+Back.close();
+
+//*********************************************************************************************************************************************************************************  
+
+
+line=1;
+row=0;
+col=0;
+
+while(keyboard6.hasNext())
+{
+if(line<=4)
+{
+Back1.println(keyboard6.nextLine());
+line++;
+}
+else 
+{
+line+=3;
+if (col<COL)
+{
+EndImage[row][col][0] = keyboard6.nextInt();
+EndImage[row][col][1] = keyboard6.nextInt();
+EndImage[row][col][2] = keyboard6.nextInt();
+col++;
+
+}
+else
+{
+row++;
+col = 0;
+EndImage[row][col][0] = keyboard6.nextInt();
+EndImage[row][col][1] = keyboard6.nextInt();
+EndImage[row][col][2] = keyboard6.nextInt();
+col++;
+
+}
+}
+}
+keyboard6.close();
+
+
+for(row = 0; row < ROW; row++)
+{
+for(col=0; col<COL;col++)
+{
+for(int color = 0; color<3; color++)
+{
+BackImage1[row][col][color] = (BackImage[row][col][color] + EndImage[row][col][color])/2;
+Back1.println(BackImage1[row][col][color]);
+System.out.println(BackImage1[row][col][color]);
+}
+}
+}
+Back1.close();
+
+//**********************************************************************************************************************************************************************************************
+
+line=1;
+row=0;
+col=0;
+
+while(keyboard7.hasNext())
+{
+if(line<=4)
+{
+Back2.println(keyboard7.nextLine());
+line++;
+}
+else 
+{
+line+=3;
+if (col<COL)
+{
+EndImage[row][col][0] = keyboard7.nextInt();
+EndImage[row][col][1] = keyboard7.nextInt();
+EndImage[row][col][2] = keyboard7.nextInt();
+col++;
+
+}
+else
+{
+row++;
+col = 0;
+EndImage[row][col][0] = keyboard7.nextInt();
+EndImage[row][col][1] = keyboard7.nextInt();
+EndImage[row][col][2] = keyboard7.nextInt();
+col++;
+
+}
+}
+}
+keyboard7.close();
+
+
+for(row = 0; row < ROW; row++)
+{
+for(col=0; col<COL;col++)
+{
+for(int color = 0; color<3; color++)
+{
+BackImage2[row][col][color] = (MiddleImage[row][col][color] + BackImage[row][col][color])/2;
+Back2.println(BackImage2[row][col][color]);
+System.out.println(BackImage2[row][col][color]);
+}
+}
+}
+Back2.close();
+
+
+
+}
+}
+
+
+
+
+
+
+
+
+
+
+
+Get Outlook for iOS
+From: Quincy Jackson <jacksonquincy84@gmail.com>
+Sent: Thursday, June 11, 2020 5:07:58 PM
+To: Jackson, Quincy <qjackson115@rams.wssu.edu>
+Subject:
+ 
+import java.util.Scanner; 
+import java.io.*;
+
+
+public class Recursion
+{
+
+
+
+public static void main(String[] args) throws IOException 
+{
+
+final int ROW = 667;
+final int COL = 1000;
+File file = new File("AndroidBike1.ppm" );
+File file2 = new File("AndroidBike2.ppm");
+File file3 = new File("Mid.ppm");
+File file4 = new File("Front.ppm");
+File file5 = new File("Front1.ppm");
+File file6 = new File("Front2.ppm");
+File file7 = new File("Back.ppm");
+File file8 = new File("Back1.ppm");
+File file9 = new File("Back2.ppm");
+
+
+Scanner keyboard = new Scanner(file);
+Scanner keyboard2 = new Scanner(file);
+Scanner keyboard3 = new Scanner(file);
+Scanner keyboard4 = new Scan
